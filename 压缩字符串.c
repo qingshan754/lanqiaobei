@@ -1,21 +1,43 @@
 #include <stdio.h>
 #include <string.h>
-int main (){
+int main()
+{
     char str[501];
     scanf("%s", str);
     int len = strlen(str);
     int hash[256] = {0};
-    for (int i = 0; i < len;i++){
+    int can_pass = 0;
+
+    for (int i = 0; i < len; i++)
+    {
         hash[(unsigned char)str[i]]++;
     }
-    for (int i = 0; i < len;i++){
-        if(hash[(unsigned char)str[i]]==1){
+
+    for (int i = 0; i < len; i++)
+    {
+        if (hash[(unsigned char)str[i]] > 1)
+        {
+            can_pass = 1;
+            break;
+        }
+    }
+    if(can_pass == 0)
+    {
+        printf("No\n");
+        return 0;
+    }
+    
+    for (int i = 0; i < len; i++)
+    {
+        if (hash[(unsigned char)str[i]] == 1)
+        {
             printf("%c", str[i]);
         }
-        else if(hash[(unsigned char)str[i]]>1){
+        else if (hash[(unsigned char)str[i]] > 1)
+        {
             printf("%c%d", str[i], hash[(unsigned char)str[i]]);
         }
         hash[(unsigned char)str[i]] = 0;
     }
-        return 0;
+    return 0;
 }
